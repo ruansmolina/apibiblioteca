@@ -33,4 +33,8 @@ public class LivroService {
         return new DTOLivroInfo(result);
     }
 
+    public void deleteById(Long id) {
+        if(lr.existsById(id)) throw new RuntimeException("Livro não encontrado");
+        lr.deleteById(id);
+    }
 }

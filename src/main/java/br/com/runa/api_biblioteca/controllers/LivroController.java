@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@SuppressWarnings("unused")
 @RestController
 @RequestMapping("/livros")
 public class LivroController {
@@ -27,14 +27,18 @@ public class LivroController {
     public ResponseEntity<DTOLivroInfo> getById(@PathVariable Long id){
         return ResponseEntity.ok(ls.getById(id));
     }
-    @PostMapping
+    @PostMapping// APENAS ADM
     public ResponseEntity<Long> createLivro(@RequestBody @Valid DTOCreateLivro data){
         var id = ls.saveLivro(data);
         return ResponseEntity.ok(id);
     }
-    @PutMapping("/{id}")
+    @PutMapping("/{id}")//APENAS ADM
     public ResponseEntity<DTOLivroInfo> updateLivro(@PathVariable Long id, @RequestBody DTOUpdateLivro data){
        return ResponseEntity.ok( ls.updateLivro(data,id));
     }
-
+    @DeleteMapping("/{id}")//APENAS ADM
+    public ResponseEntity deleteLivro(@PathVariable Long id){
+        ls.deleteById(id);
+        return ResponseEntity.accepted().build();
+    }
 }
