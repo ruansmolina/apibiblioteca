@@ -1,5 +1,6 @@
 package br.com.runa.api_biblioteca.entitys;
 
+import br.com.runa.api_biblioteca.DTO.DTOCreateCategoria;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,4 +18,8 @@ public class Categoria {
     public Categoria(Integer id){
         this.id = id;
     }
+    public Categoria(DTOCreateCategoria data) {
+        setNome(data.nome());
+    }
+
 }
