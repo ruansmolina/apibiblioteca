@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS `apibiblioteca`.`Usuario` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NULL,
   `email` VARCHAR(45) NULL,
   `senha` VARCHAR(45) NULL,
