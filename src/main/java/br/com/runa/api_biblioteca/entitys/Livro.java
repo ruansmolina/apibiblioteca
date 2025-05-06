@@ -2,9 +2,13 @@ package br.com.runa.api_biblioteca.entitys;
 
 import br.com.runa.api_biblioteca.DTO.DTOCreateLivro;
 import br.com.runa.api_biblioteca.DTO.DTOUpdateLivro;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.Set;
 
 @Entity
 @Table
@@ -29,6 +33,10 @@ public class Livro {
     private int quantidadeTotal;
     private int quantidadeDisponivel;
 
+    @OneToMany(mappedBy = "livro")
+    @JsonIgnore
+    private Set<Emprestimo> emprestimos;
+
     public Livro(DTOCreateLivro data) {
         setAutor(new Autor(data.autorId()));
         setCategoria(new Categoria(data.categoriaId()));
@@ -37,6 +45,10 @@ public class Livro {
         if(data.anoPublicacao()!=null) setAnoPublicacao(data.anoPublicacao());
         setQuantidadeTotal(data.quantidadeTotal());
         setQuantidadeDisponivel(data.quantidadeTotal());
+    }
+
+    public Livro( Long id) {
+        this.setId(id);
     }
 
     public String getAutorFullname(){
